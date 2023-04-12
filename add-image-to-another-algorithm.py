@@ -52,13 +52,13 @@ def merge_images(first_image, second_image):
 
 ###############################################################################################
 
-originalImage = cv2.imread("Squidward.jpeg")
-addedImage = cv2.imread("logo.png")
+original_image = cv2.imread("Squidward.jpeg")
+added_image = cv2.imread("logo.png")
 
-new_img = merge_images(originalImage, addedImage)
+new_img = merge_images(original_image, added_image)
 
-cv2.imshow('Original Image', originalImage)
-cv2.imshow('Added Image', addedImage)
+cv2.imshow('Original Image', original_image)
+cv2.imshow('Added Image', added_image)
 cv2.imshow('New Image', new_img)
 
 cv2.waitKey(0)
