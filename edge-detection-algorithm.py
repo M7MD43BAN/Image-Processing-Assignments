@@ -30,17 +30,16 @@ def edge_detection(image):
     padding = 1
     padded_image = cv2.copyMakeBorder(image, padding, padding, padding, padding, cv2.BORDER_REFLECT)
 
-    # Loop through each pixel in the image
     for i in range(padding, row + padding):
         for j in range(padding, column + padding):
-            # Get the current 3x3 pixel window
-            window = padded_image[i - padding:i + padding + 1, j - padding:j + padding + 1]
+            # Get the current 3x3 pixel mask
+            mask = padded_image[i - padding:i + padding + 1, j - padding:j + padding + 1]
 
             # Apply each filter to the window and calculate the gradient
-            horizontal_gradient = np.sum(np.multiply(window, horizontal_filter))
-            vertical_gradient = np.sum(np.multiply(window, vertical_filter))
-            diagonal1_gradient = np.sum(np.multiply(window, diagonal1_filter))
-            diagonal2_gradient = np.sum(np.multiply(window, diagonal2_filter))
+            horizontal_gradient = np.sum(np.multiply(mask, horizontal_filter))
+            vertical_gradient = np.sum(np.multiply(mask, vertical_filter))
+            diagonal1_gradient = np.sum(np.multiply(mask, diagonal1_filter))
+            diagonal2_gradient = np.sum(np.multiply(mask, diagonal2_filter))
 
             # Set the value of the new images based on the gradient values
             new_image1[i - padding, j - padding] = np.abs(horizontal_gradient)
@@ -51,10 +50,8 @@ def edge_detection(image):
     # Combine the new images into one image using the maximum gradient
     final_image = np.maximum(np.maximum(np.maximum(new_image1, new_image2), new_image3), new_image4)
 
-    # Convert the image back to uint8 format
     final_image = final_image.astype(np.uint8)
 
-    # Return the final image
     return final_image
 
 
