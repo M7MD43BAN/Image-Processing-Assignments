@@ -27,7 +27,9 @@ filtered_rgb_image = cv2.merge([average_filter(rgb_image[:, :, i], 7) for i in r
 
 cv2.imshow('Original Gray Image', gray_image)
 cv2.imshow('Original RGB Image', rgb_image)
-cv2.imshow('Filtered Image', filtered_rgb_image)
+
+cv2.imshow('Filtered Gray Image', filtered_gray_image)
+cv2.imshow('Filtered RGB Image', filtered_rgb_image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
