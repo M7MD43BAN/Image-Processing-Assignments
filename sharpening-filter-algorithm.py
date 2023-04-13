@@ -60,7 +60,7 @@ def sharpening(image):
     return sharpened_image
 
 
-img = cv2.imread('Squidward.jpeg', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('Smilling-Shiba-Pics.jpeg', cv2.IMREAD_GRAYSCALE)
 filtered_image = sharpening(img)
 
 cv2.imshow('Original Image', img)
