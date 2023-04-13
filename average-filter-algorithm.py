@@ -3,31 +3,31 @@ import numpy as np
 
 
 def average_filter(image, mask_size):
-    [row, column, channel] = image.shape
-    new_image = np.zeros([row, column, channel], dtype=np.uint8)
+    [row, column] = image.shape
+    new_image = np.zeros([row, column], dtype=np.uint8)
 
     padding = mask_size // 2
     padded_image = cv2.copyMakeBorder(image, padding, padding, padding, padding, cv2.BORDER_REFLECT)
 
     for i in range(padding, row + padding):
         for j in range(padding, column + padding):
-            # Extract the mask from the padded image
             mask = padded_image[i - padding:i + padding + 1, j - padding:j + padding + 1]
 
-            # Calculate the mean value of the mask - axis=(0, 1) for the channels
-            mask_mean = np.sum(mask, axis=(0, 1)) / (mask_size ** 2)
-
-            # Set the corresponding pixel in the filtered image to the mean value
+            mask_mean = np.sum(mask) / (mask_size ** 2)
             new_image[i - padding, j - padding] = mask_mean
 
     return new_image
 
 
-img = cv2.imread("Squidward.jpeg")
-filtered_img = average_filter(img, 7)
+gray_image = cv2.imread('Squidward.jpeg', cv2.IMREAD_GRAYSCALE)
+rgb_image = cv2.imread('Squidward.jpeg', cv2.IMREAD_COLOR)
 
-cv2.imshow('Original Image', img)
-cv2.imshow('Filtered Image', filtered_img)
+filtered_gray_image = average_filter(gray_image, 7)
+filtered_rgb_image = cv2.merge([average_filter(rgb_image[:, :, i], 7) for i in range(3)])
+
+cv2.imshow('Original Gray Image', gray_image)
+cv2.imshow('Original RGB Image', rgb_image)
+cv2.imshow('Filtered Image', filtered_rgb_image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
