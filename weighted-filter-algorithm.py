@@ -29,7 +29,7 @@ def gaussian_filter(image, size, sigma):
 
 
 rgb_image = cv2.imread('Smilling-Shiba-Pics.jpeg', cv2.IMREAD_COLOR)
-filtered_rgb_image = cv2.merge([gaussian_filter(rgb_image[:, :, i], 7, 1.5) for i in range(3)])
+filtered_rgb_image = cv2.merge([gaussian_filter(rgb_image[:, :, i], 7, 2.5) for i in range(3)])
 
 cv2.imshow('Original Image', rgb_image)
 cv2.imshow('Filtered Image', filtered_rgb_image)
