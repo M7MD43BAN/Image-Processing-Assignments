@@ -25,6 +25,7 @@ def butterworth_low_pass(image, radius, n):
 
     return img_filtered, mask
 
+
 original_image = cv2.imread("Squidward.jpeg")
 new_img, mask = butterworth_low_pass(original_image, 20, 2)
 
