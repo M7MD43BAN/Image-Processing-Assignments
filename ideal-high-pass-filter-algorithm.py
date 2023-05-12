@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 
-def ideal_low_pass(image, radius):
+def ideal_high_pass(image, radius):
     [row, column, channel] = image.shape
 
     dft = np.fft.fft2(image, axes=(0, 1))
@@ -15,9 +15,9 @@ def ideal_low_pass(image, radius):
             for j in range(0, column):
                 distance = int(((((i - (row / 2)) ** 2) + ((j - (column / 2)) ** 2)) ** 0.5))
                 if distance > radius:
-                    mask[i, j, k] = 0
-                else:
                     mask[i, j, k] = 255
+                else:
+                    mask[i, j, k] = 0
 
     dft_shift_masked = np.multiply(dft_shift, mask) / 255
 
@@ -29,7 +29,7 @@ def ideal_low_pass(image, radius):
 
 
 original_image = cv2.imread("Squidward.jpeg")
-new_img, mask = ideal_low_pass(original_image, 50)
+new_img, mask = ideal_high_pass(original_image, 50)
 
 cv2.imshow('Original Image', original_image)
 cv2.imshow('Mask', mask)
