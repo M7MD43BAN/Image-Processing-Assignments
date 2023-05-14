@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-###############################################################################################
 # Create a function for histogram plot
 # First parameter: Input image that will be adjustment
 def histogram_equalization(image):
@@ -28,15 +27,15 @@ def histogram_equalization(image):
         for i in range(256):
             equalized_values[i] = int(round((255 * running_sum[i]) / pixels_sum))
 
-        # Draw histogram equalization
-        plt.bar(range(256), equalized_values, color='k')
-        # The plt.xlim() function sets the x-axis limits to be between 0 and 256
-        plt.xlim([0, 256])
-        plt.suptitle('Histogram of Gray Image')
-        plt.show()
+        return equalized_values
 
-
-###############################################################################################
 
 img = cv2.imread("Squidward.jpeg", 0)
-histogram_equalization(img)
+histogram_equalization_output = histogram_equalization(img)
+
+# Draw histogram equalization
+plt.bar(range(256), histogram_equalization_output, color='k')
+# The plt.xlim() function sets the x-axis limits to be between 0 and 256
+plt.xlim([0, 256])
+plt.suptitle('Histogram of Gray Image')
+plt.show()
